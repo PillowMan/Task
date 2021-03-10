@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D80" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="BusinessNumberData" representedClassName="BusinessNumberData" syncable="YES" codeGenerationType="class">
+        <attribute name="label" optional="YES" attributeType="String"/>
+        <attribute name="number" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CallData" representedClassName="CallData" syncable="YES" codeGenerationType="class">
+        <attribute name="created" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="duration" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="favorite" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="String"/>
+        <attribute name="origin" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="businessNumber" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BusinessNumberData"/>
+        <relationship name="client" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ClientData"/>
+    </entity>
+    <entity name="ClientData" representedClassName="ClientData" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="BusinessNumberData" positionX="-54" positionY="9" width="128" height="59"/>
+        <element name="CallData" positionX="-63" positionY="-18" width="128" height="149"/>
+        <element name="ClientData" positionX="-36" positionY="9" width="128" height="59"/>
+    </elements>
+</model>
