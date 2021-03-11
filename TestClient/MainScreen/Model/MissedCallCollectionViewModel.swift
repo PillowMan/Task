@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 protocol MissedCallCollectionViewModelProtocol {
     func fetchCallList(fromUrl url: String, completion: @escaping () -> Void)
     func getNumberOfCalls() -> Int
@@ -32,18 +33,22 @@ class MissedCallCollectionViewModel: MissedCallCollectionViewModelProtocol {
                 guard let firstDate = v1.created?.convertToDate(), let secondDate = v2.created?.convertToDate() else {return false}
                 return firstDate < secondDate
             }
+            
             let dataMananger = DataManager.shared
-            let context = dataMananger.privateContext
+            dataMananger.deleteAllData(from: "CallData")
+            let context = dataMananger.persistentContainer.viewContext
             let entityConverter = EntityConverter(context: context)
             let callDataList = entityConverter.getCallDataList(from: calls)
-            dataMananger.saveContext(context)
+            dataMananger.saveContext()
             self.calls = callDataList
+            completion()
         }
         
     }
     
     
     func getNumberOfCalls() -> Int {
+        print("get number of calls")
         return calls.count
     }
     

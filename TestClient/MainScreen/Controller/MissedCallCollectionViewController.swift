@@ -8,7 +8,7 @@
 
 import UIKit
 
-enum ScreenType:String {case detail = "Detail"}
+enum ScreenType:String {case detail = "DetailSegue"}
 let missedCallLink = "https://5e3c202ef2cb300014391b5a.mockapi.io/testapi"
 
 class MissedCallCollectionViewController: UICollectionViewController {
@@ -26,6 +26,7 @@ class MissedCallCollectionViewController: UICollectionViewController {
         self.navigationController?.hidesBarsOnSwipe = true
         viewModel?.fetchCallList(fromUrl: missedCallLink){
             DispatchQueue.main.async {
+                
                 self.collectionView.reloadData()
             }
         }

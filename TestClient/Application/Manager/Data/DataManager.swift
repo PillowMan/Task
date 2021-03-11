@@ -11,10 +11,10 @@ import CoreData
 
 
 protocol DataManagerProtocol: class {
-    var privateContext: NSManagedObjectContext {get}
+    var persistentContainer: NSPersistentContainer {get}
     func fetchCallList() -> [CallData]?
+    func deleteAllData(from entity: String)
     func saveContext ()
-    func saveContext (_ context: NSManagedObjectContext)
     
 }
 
@@ -52,16 +52,12 @@ class DataManager: DataManagerProtocol{
         return container
     }()
     
-    lazy var privateContext: NSManagedObjectContext = {
-        let privateMOC = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-        privateMOC.parent = persistentContainer.viewContext
-        return privateMOC
-    }()
     
     // MARK: - Core Data Saving support
     
     
-    func saveContext (_ context: NSManagedObjectContext) {
+    func saveContext () {
+        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -74,24 +70,34 @@ class DataManager: DataManagerProtocol{
         } else {
             print("has no changes")
         }
-        
-    }
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        saveContext(context)
     }
     
     func fetchCallList() -> [CallData]? {
         let fetchRequest: NSFetchRequest<CallData> = CallData.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
         do {
-            let results = try privateContext.fetch(fetchRequest)
+            let results = try persistentContainer.viewContext.fetch(fetchRequest)
             return results
         } catch let error as NSError {
             print(error)
         }
         return nil
     }
+    
+    func deleteAllData(from entity: String) {
+        do {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            let results = try persistentContainer.viewContext.fetch(fetchRequest)
+            results.forEach { (object) in
+                guard let object = object as? NSManagedObject else {return}
+                persistentContainer.viewContext.delete(object)
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    
     
     
 }

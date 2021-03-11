@@ -21,7 +21,7 @@ class MissedCallCollectionViewCellModel: MissedCallCollectionViewCellModelProtoc
     private var callData: CallData
     
     var numberOfContact: String {
-        return callData.businessNumber?.number ?? ""
+        return callData.client?.address ?? ""
     }
     
     var contactName: String {

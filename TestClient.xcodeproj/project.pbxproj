@@ -26,6 +26,7 @@
 		65D907EB25FA21EB00D069CB /* MissedCallCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D907EA25FA21EB00D069CB /* MissedCallCollectionViewModel.swift */; };
 		65D907EF25FA2D8C00D069CB /* MissedCallCollectionViewCellModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D907EE25FA2D8C00D069CB /* MissedCallCollectionViewCellModelProtocol.swift */; };
 		65D907F925FA3D9900D069CB /* MissedCallScreenBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D907F825FA3D9900D069CB /* MissedCallScreenBuilder.swift */; };
+		65D9080025FA622A00D069CB /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D907FF25FA622A00D069CB /* Date+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		65D907EA25FA21EB00D069CB /* MissedCallCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedCallCollectionViewModel.swift; sourceTree = "<group>"; };
 		65D907EE25FA2D8C00D069CB /* MissedCallCollectionViewCellModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedCallCollectionViewCellModelProtocol.swift; sourceTree = "<group>"; };
 		65D907F825FA3D9900D069CB /* MissedCallScreenBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissedCallScreenBuilder.swift; sourceTree = "<group>"; };
+		65D907FF25FA622A00D069CB /* Date+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 			children = (
 				651E840B25F92CFD00E4B6F2 /* EntityConverter.swift */,
 				651E841025F9345700E4B6F2 /* String+Helpers.swift */,
+				65D907FF25FA622A00D069CB /* Date+Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 				6563ACD124F97240000F56BE /* AppDelegate.swift in Sources */,
 				651E842525F95C9400E4B6F2 /* MissedCallCollectionViewCell.swift in Sources */,
 				651E83F325F9138400E4B6F2 /* DataManager.swift in Sources */,
+				65D9080025FA622A00D069CB /* Date+Helpers.swift in Sources */,
 				65D907E425F9F5BB00D069CB /* DetailViewModel.swift in Sources */,
 				651E83EC25F9050B00E4B6F2 /* NetworkManager.swift in Sources */,
 				651E83D425F8EE9000E4B6F2 /* TestClient.xcdatamodeld in Sources */,

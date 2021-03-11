@@ -17,11 +17,12 @@ class MissedCallCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var time: UILabel!
     
     var viewModel: MissedCallCollectionViewCellModelProtocol? {
-        willSet{
+        willSet (viewModel){
             guard let viewModel = viewModel else {return}
              name.text = viewModel.contactName
             number.text = viewModel.numberOfContact
             duration.text = viewModel.missedCallDuration
+            print(duration.text)
             time.text = viewModel.missedCallDate
             
         }

@@ -28,7 +28,7 @@ class EntityConverter {
             callData.origin = call.origin
             callData.favorite = call.favorite ?? false
             
-            callData.duration = call.duration?.convertToDate()
+            callData.duration = call.duration?.convertTimeToDate()
             
             
             

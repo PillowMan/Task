@@ -34,7 +34,18 @@ class DetailViewController: UIViewController {
         self.navigationItem.setHidesBackButton(true, animated: true)
         configContactView()
         configCallImage()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        guard let viewModel = detailViewModel else {return}
+        nameOfContact.text = viewModel.nameOfContact
+        contactNumber.text = viewModel.contactNumber
+        duration.text = viewModel.duration
+        businessNumberName.text = viewModel.businessNumberName
+        businessNumber.text = viewModel.businessNumber
     }
     
     private func configCallImage() {

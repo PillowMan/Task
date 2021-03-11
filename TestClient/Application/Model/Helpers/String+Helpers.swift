@@ -15,7 +15,7 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
-    func convertTimeToDate(_ time: String) -> Date? {
+    func convertTimeToDate() -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "hh:mm:ss"
         return dateFormatter.date(from: self)
