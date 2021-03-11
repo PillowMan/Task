@@ -16,11 +16,11 @@ class EntityConverter {
         self.context = context
     }
     
-    func getCallDataList(from callList: CallList) -> [CallData] {
+    func getCallDataList(from calls: [Call]) -> [CallData] {
         
         
         var callDataList = [CallData]()
-        callList.list.forEach { (call) in
+        calls.forEach { (call) in
             let callData = CallData(context: context)
             callData.id = call.id
             callData.created = call.created?.convertToDate()

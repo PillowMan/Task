@@ -16,18 +16,29 @@ class MissedCallCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var duration: UILabel!
     @IBOutlet weak var time: UILabel!
     
+    var viewModel: MissedCallCollectionViewCellModelProtocol? {
+        willSet{
+            guard let viewModel = viewModel else {return}
+             name.text = viewModel.contactName
+            number.text = viewModel.numberOfContact
+            duration.text = viewModel.missedCallDuration
+            time.text = viewModel.missedCallDate
+            
+        }
+    }
+    
     
     override func layoutSubviews() {
         configCell()
     }
     
     func configCell(){
-        self.layer.cornerRadius = 20.0
+        self.contentView.layer.cornerRadius = 20
         self.layer.borderWidth = 0.0
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.shadowOffset = CGSize(width: 0, height: 0)
         self.layer.shadowRadius = 5.0
-        self.layer.shadowOpacity = 0.1
+        self.layer.shadowOpacity = 0.2
         self.layer.masksToBounds = false
     }
     

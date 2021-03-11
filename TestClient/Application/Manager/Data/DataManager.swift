@@ -12,8 +12,9 @@ import CoreData
 
 protocol DataManagerProtocol: class {
     var privateContext: NSManagedObjectContext {get}
-    func fetchCallList() -> CallList?
+    func fetchCallList() -> [CallData]?
     func saveContext ()
+    func saveContext (_ context: NSManagedObjectContext)
     
 }
 
@@ -59,8 +60,8 @@ class DataManager: DataManagerProtocol{
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
-        let context = persistentContainer.viewContext
+    
+    func saveContext (_ context: NSManagedObjectContext) {
         if context.hasChanges {
             do {
                 try context.save()
@@ -70,45 +71,22 @@ class DataManager: DataManagerProtocol{
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        } else {
+            print("has no changes")
         }
+        
+    }
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        saveContext(context)
     }
     
-    
-    
-    //    //MARK: - use for all requests
-    //    func fetchResultController<T>(entityName: String, keyForSort: String, typeContext: String = "main", cacheName: String? = nil) -> NSFetchedResultsController<T>  {
-    //        let fetchRequest = NSFetchRequest<T>(entityName: entityName)
-    //        fetchRequest.sortDescriptors = [NSSortDescriptor(key: keyForSort, ascending: true)]
-    //        let context = typeContext == "main" ? self.context : privateContext
-    //        let fetchResultController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: cacheName)
-    //
-    //        return fetchResultController
-    //    }
-    //
-    //    func fetchWords(for key: String, with text: String, isSuggestMode: Bool = false, completion: @escaping ([Word]) -> Void){
-    //        let fetchRequest = Word.createFetchRequest()
-    //        fetchRequest.configuration(for: key, text, isSuggestMode: isSuggestMode)
-    //        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-    //        privateContext.parent = context
-    //
-    //
-    //        privateContext.perform {
-    //            do{
-    ////                print(isSuggestMode ? "suggest mode on" : "suggest mode off")
-    //                let results = try self.context.fetch(fetchRequest)
-    //                return completion(results)
-    //            }catch {
-    //                print(error.localizedDescription)
-    //            }
-    //        }
-    //    }
-    
-    func fetchCallList() -> CallList? {
+    func fetchCallList() -> [CallData]? {
         let fetchRequest: NSFetchRequest<CallData> = CallData.fetchRequest()
         fetchRequest.sortDescriptors = [NSSortDescriptor(key: "created", ascending: true)]
         do {
             let results = try privateContext.fetch(fetchRequest)
-            print(results.isEmpty)
+            return results
         } catch let error as NSError {
             print(error)
         }

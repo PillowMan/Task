@@ -21,14 +21,11 @@ class NetworkManager: NetworkProtocol {
         guard let url = URL(string: url) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
-                print("exit")
                 return}
-            print("exit2")
             do {
                 let jsonDecoder = JSONDecoder()
                 let callList = try jsonDecoder.decode(CallList.self, from: data)
-                print(callList)
-//                completion(calls)
+                completion(callList)
             } catch let error as NSObject{
                     print(error)
                 }
