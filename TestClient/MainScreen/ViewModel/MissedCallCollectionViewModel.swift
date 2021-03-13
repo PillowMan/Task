@@ -28,7 +28,7 @@ class MissedCallCollectionViewModel: MissedCallCollectionViewModelProtocol {
     func fetchCallList(fromUrl url: String, completion: @escaping () -> Void) {
         
         
-        NetworkManager.shared.fetchContacts(fromUrl: url) { (results) in
+        NetworkManager.shared.fetchMissedCalls(fromUrl: url) { (results) in
             
             switch results {
             case .success(let calls):

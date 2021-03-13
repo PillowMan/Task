@@ -10,7 +10,7 @@ import Foundation
 
 protocol NetworkProtocol: class {
     typealias MissedCallsData = Result<[Call], Error>
-    func fetchContacts(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void)
+    func fetchMissedCalls(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void)
 }
 
 class NetworkManager: NetworkProtocol {
@@ -18,7 +18,7 @@ class NetworkManager: NetworkProtocol {
     public static var shared = NetworkManager()
     private init(){}
     
-    func fetchContacts(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void){
+    func fetchMissedCalls(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void){
         guard let url = URL(string: url) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
