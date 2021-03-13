@@ -9,7 +9,8 @@
 import Foundation
 
 protocol NetworkProtocol: class {
-    func fetchContacts(fromUrl url: String, completion: @escaping (CallList) -> Void)
+    typealias MissedCallsData = Result<[Call], Error>
+    func fetchContacts(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void)
 }
 
 class NetworkManager: NetworkProtocol {
@@ -17,7 +18,7 @@ class NetworkManager: NetworkProtocol {
     public static var shared = NetworkManager()
     private init(){}
     
-    func fetchContacts(fromUrl url: String, completion: @escaping (CallList) -> Void){
+    func fetchContacts(fromUrl url: String, completion: @escaping (MissedCallsData) -> Void){
         guard let url = URL(string: url) else {return}
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             guard let data = data else {
@@ -25,9 +26,9 @@ class NetworkManager: NetworkProtocol {
             do {
                 let jsonDecoder = JSONDecoder()
                 let callList = try jsonDecoder.decode(CallList.self, from: data)
-                completion(callList)
-            } catch let error as NSObject{
-                    print(error)
+                completion(.success(callList.list))
+            } catch{
+                completion(.failure(error))
                 }
         }.resume()
         

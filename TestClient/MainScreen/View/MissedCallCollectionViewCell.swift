@@ -22,7 +22,6 @@ class MissedCallCollectionViewCell: UICollectionViewCell {
              name.text = viewModel.contactName
             number.text = viewModel.numberOfContact
             duration.text = viewModel.missedCallDuration
-            print(duration.text)
             time.text = viewModel.missedCallDate
             
         }

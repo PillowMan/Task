@@ -28,19 +28,26 @@ class MissedCallCollectionViewModel: MissedCallCollectionViewModelProtocol {
     func fetchCallList(fromUrl url: String, completion: @escaping () -> Void) {
         
         
-        NetworkManager.shared.fetchContacts(fromUrl: url) { (callList) in
-            let calls = callList.list.sorted { (v1, v2) -> Bool in
-                guard let firstDate = v1.created?.convertToDate(), let secondDate = v2.created?.convertToDate() else {return false}
-                return firstDate < secondDate
+        NetworkManager.shared.fetchContacts(fromUrl: url) { (results) in
+            
+            switch results {
+            case .success(let calls):
+                let calls = calls.sorted { (v1, v2) -> Bool in
+                    guard let firstDate = v1.created?.convertToDate(), let secondDate = v2.created?.convertToDate() else {return false}
+                    return firstDate < secondDate
+                }
+                
+                let dataMananger = DataManager.shared
+                dataMananger.deleteAllData(from: "CallData")
+                let context = dataMananger.persistentContainer.viewContext
+                let entityConverter = EntityConverter(context: context)
+                let callDataList = entityConverter.getCallDataList(from: calls)
+                dataMananger.saveContext()
+                self.calls = callDataList
+            default: break
             }
             
-            let dataMananger = DataManager.shared
-            dataMananger.deleteAllData(from: "CallData")
-            let context = dataMananger.persistentContainer.viewContext
-            let entityConverter = EntityConverter(context: context)
-            let callDataList = entityConverter.getCallDataList(from: calls)
-            dataMananger.saveContext()
-            self.calls = callDataList
+           
             completion()
         }
         
@@ -48,7 +55,6 @@ class MissedCallCollectionViewModel: MissedCallCollectionViewModelProtocol {
     
     
     func getNumberOfCalls() -> Int {
-        print("get number of calls")
         return calls.count
     }
     
