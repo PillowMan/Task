@@ -65,6 +65,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		650AA74D25FD578300008719 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				65D907EA25FA21EB00D069CB /* MissedCallCollectionViewModel.swift */,
+				65D907EE25FA2D8C00D069CB /* MissedCallCollectionViewCellModelProtocol.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		651E83D825F9022300E4B6F2 /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +123,7 @@
 		651E83DD25F9027C00E4B6F2 /* MainScreen */ = {
 			isa = PBXGroup;
 			children = (
+				650AA74D25FD578300008719 /* ViewModel */,
 				651E83E125F9033C00E4B6F2 /* Model */,
 				651E83E025F9033500E4B6F2 /* Controller */,
 				651E83DF25F9032600E4B6F2 /* View */,
@@ -142,8 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				651E83EF25F9062C00E4B6F2 /* Contact.swift */,
-				65D907EA25FA21EB00D069CB /* MissedCallCollectionViewModel.swift */,
-				65D907EE25FA2D8C00D069CB /* MissedCallCollectionViewCellModelProtocol.swift */,
 				65D907F825FA3D9900D069CB /* MissedCallScreenBuilder.swift */,
 			);
 			path = Model;
@@ -152,18 +160,10 @@
 		651E83E325F9035F00E4B6F2 /* DetailScreen */ = {
 			isa = PBXGroup;
 			children = (
-				651E83E625F9039400E4B6F2 /* Model */,
+				651E83E625F9039400E4B6F2 /* ViewModel */,
 				651E83E525F9038D00E4B6F2 /* Controller */,
-				651E83E425F9038700E4B6F2 /* View */,
 			);
 			path = DetailScreen;
-			sourceTree = "<group>";
-		};
-		651E83E425F9038700E4B6F2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		651E83E525F9038D00E4B6F2 /* Controller */ = {
@@ -174,12 +174,12 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		651E83E625F9039400E4B6F2 /* Model */ = {
+		651E83E625F9039400E4B6F2 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				65D907E325F9F5BB00D069CB /* DetailViewModel.swift */,
 			);
-			path = Model;
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		651E83E725F903C600E4B6F2 /* Supporting files */ = {
